@@ -1,0 +1,25 @@
+{
+  "name": "eqapo-to-wavelet",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Convert Equalizer APO / Peace configuration files to Wavelet GraphicEQ in the browser.",
+  "homepage": "https://eqapo-to-wavelet.gapski.workers.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gap032/eqapo-to-wavelet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gap032/eqapo-to-wavelet/issues"
+  },
+  "author": "gap032",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "node --test",
+    "check": "node --check public/core.js && node --check public/app.js && node --check src/worker.js"
+  },
+  "devDependencies": {
+    "wrangler": "^4.160.1"
+  }
+}
