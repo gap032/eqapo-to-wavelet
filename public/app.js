@@ -61,7 +61,7 @@ const STRINGS = {
     footerBuiltOn:
       'Na podstawie projektu <a href="https://github.com/zettonaender/eqapotographiceq-gui" target="_blank" rel="noreferrer noopener">eqapotographiceq-gui</a>.',
     footerMeta: 'Cloudflare Worker · bez zależności · open source',
-    switchTo: 'Switch to English',
+    languageLabel: 'Język',
     githubRepo: 'Repozytorium na GitHubie',
     supportTitle: 'Wesprzyj projekt na buycoffee.to',
     support: 'Wsparcie',
@@ -160,7 +160,7 @@ const STRINGS = {
     footerBuiltOn:
       'Based on the <a href="https://github.com/zettonaender/eqapotographiceq-gui" target="_blank" rel="noreferrer noopener">eqapotographiceq-gui</a> project.',
     footerMeta: 'Cloudflare Worker · no dependencies · open source',
-    switchTo: 'Przełącz na polski',
+    languageLabel: 'Language',
     githubRepo: 'GitHub repository',
     supportTitle: 'Support the project on buycoffee.to',
     support: 'Support',
@@ -202,6 +202,105 @@ const STRINGS = {
     shareTitle: 'GraphicEQ for Wavelet',
     shareText: 'My GraphicEQ generated from an Equalizer APO configuration.',
     chartAria: 'Frequency chart comparing the original EQ with the Wavelet curve.',
+  },
+  de: {
+    docTitle: 'EQ APO → GraphicEQ · Konverter für Wavelet',
+    source: 'Quelle',
+    eyebrow: 'Equalizer APO / Peace → Wavelet',
+    heroTitleA: 'Bring dein EQ',
+    heroTitleB: 'aufs Handy.',
+    heroLede:
+      'Lade <code>config.txt</code> oder <code>peace.txt</code> hoch. Du erhältst eine <code>GraphicEQ</code>-Datei, bereit für den Import in Wavelet. Die gesamte Berechnung läuft in deinem Browser.',
+    pointPrivate: 'Deine Datei bleibt auf dem Gerät',
+    pointBands: '127 Bänder, Wavelet-Format',
+    pointFormats: 'APO, Peace und AutoEQ',
+    dropTitle: 'Konfigurationsdatei wählen',
+    dropHint: 'Tippen zum Auswählen oder Datei hierher ziehen',
+    chooseFile: 'Datei wählen',
+    pasteText: 'Text einfügen',
+    dropFormats: 'config.txt · peace.txt · ParametricEQ.txt',
+    tryExample: 'Beispiel ausprobieren',
+    inputStep: 'Eingabe',
+    editorTitle: 'Konfiguration',
+    deviceLabel: 'Gerät',
+    deviceHint: 'Wähle den Geräteabschnitt aus der Konfigurationsdatei.',
+    sampleRateLabel: 'Abtastrate',
+    sampleRateHint: 'Die Rate, die Equalizer APO für dieses Gerät verwendet hat.',
+    showSource: 'Konfiguration anzeigen / bearbeiten',
+    clear: 'Leeren',
+    resultStep: 'Ergebnis',
+    resultTitle: 'Graphic EQ für Wavelet',
+    ready: 'Fertig',
+    legendApo: 'Original-EQ',
+    legendWavelet: 'Wavelet nach Glättung',
+    download: 'GraphicEQ.txt herunterladen',
+    copy: 'Kopieren',
+    share: 'Teilen',
+    preview: 'Dateivorschau',
+    resultNote: 'Die Datei ist auf −0,1 dB normalisiert, ein zusätzlicher Preamp ist nicht nötig.',
+    statBands: 'Bänder',
+    statFilters: 'Filter',
+    statRange: 'Bereich',
+    statCut: 'Max. Absenkung',
+    howEyebrow: 'Drei Schritte',
+    howTitle: 'Wie es funktioniert',
+    step1Title: 'EQ-Datei finden',
+    step1Text:
+      'Equalizer APO: <code>C:\\Program Files\\EqualizerAPO\\config\\config.txt</code>. Peace: <code>peace.txt</code> im selben Ordner.',
+    step2Title: 'Hochladen und prüfen',
+    step2Text:
+      'Wähle Gerät und Abtastrate. Das Diagramm zeigt den Unterschied zwischen dem Original-EQ und dem, was Wavelet anwendet.',
+    step3Title: 'In Wavelet importieren',
+    step3Text:
+      'Öffne in Wavelet <strong>AutoEQ</strong> → <strong>GraphicEQ</strong> → <strong>Import</strong> und wähle die heruntergeladene Datei.',
+    privacyTitle: 'Deine Daten bleiben auf dem Handy',
+    privacyText:
+      'Die Datei wird lokal in deinem Browser gelesen und umgerechnet. Es wird nichts an einen Server gesendet.',
+    footerBuiltOn:
+      'Basierend auf dem Projekt <a href="https://github.com/zettonaender/eqapotographiceq-gui" target="_blank" rel="noreferrer noopener">eqapotographiceq-gui</a>.',
+    footerMeta: 'Cloudflare Worker · keine Abhängigkeiten · Open Source',
+    languageLabel: 'Sprache',
+    githubRepo: 'GitHub-Repository',
+    supportTitle: 'Unterstütze das Projekt auf buycoffee.to',
+    support: 'Unterstützen',
+    supportCoffee: 'Kaffee spendieren',
+    footerGithub: 'Quellcode',
+    pastedText: 'Eingefügter Text',
+    exampleName: 'Beispielkonfiguration',
+    charCount: 'Zeichen',
+    bandUnit: 'Bänder',
+    preampIgnored: 'ignoriert',
+    offChip: 'AUS',
+    warningsTitle: 'Hinweise',
+    errorTitle: 'Konfiguration konnte nicht verarbeitet werden',
+    errGeneric: 'Prüfe den Dateiinhalt und versuche es erneut.',
+    errEmptyInput: 'Lade eine Datei hoch oder füge eine Konfiguration ein.',
+    errNoFilters:
+      'Keine aktiven EQ-Filter gefunden. Prüfe, ob die Datei Zeilen wie „Filter: ON PK …“ enthält.',
+    errNoActiveFilters: 'Alle Filter in der Konfiguration sind deaktiviert (OFF).',
+    errInvalidRate: 'Ungültige Abtastrate.',
+    errRead: 'Datei konnte nicht gelesen werden. Versuche, sie als UTF-8 zu speichern.',
+    warnConvolution: 'Convolution-Filter übersprungen — er benötigt eine WAV-Datei.',
+    warnInclude: 'Include übersprungen — die eingebundene Datei ist im Browser nicht verfügbar.',
+    warnUnsupportedFilter: 'Unbekannter Filtertyp: {type}.',
+    warnMissingParam: 'Parameter {parameter} fehlt — Filter übersprungen.',
+    warnInvalidValue: 'Ungültiger Wert für {parameter}.',
+    warnIgnoredCommand: 'Nicht unterstützter Befehl übersprungen: {command}.',
+    warnIgnoredLine: 'Unbekannte Zeile übersprungen: {text}',
+    warnMissingQ: 'Kein Q im Filter {typeLabel} — verwende {q}.',
+    warnGraphicEq: 'GraphicEQ-Punkte konnten nicht gelesen werden.',
+    warnAboveNyquist:
+      'Fc {fc} Hz liegt über der Nyquist-Frequenz ({nyquist} Hz) — der Filter kann verzerrt sein.',
+    warnGeneric: 'Nicht unterstützter Eintrag übersprungen.',
+    toastCopied: 'In die Zwischenablage kopiert',
+    toastCopyFailed: 'Kopieren fehlgeschlagen',
+    toastDownload: 'Datei heruntergeladen',
+    toastFileTooBig: 'Die Datei ist zu groß (Limit 2 MB).',
+    toastReadError: 'Datei konnte nicht gelesen werden.',
+    toastShareFailed: 'Datei konnte nicht geteilt werden.',
+    shareTitle: 'GraphicEQ für Wavelet',
+    shareText: 'Mein GraphicEQ aus einer Equalizer-APO-Konfiguration.',
+    chartAria: 'Frequenzdiagramm: Vergleich des Original-EQ mit der Wavelet-Kurve.',
   },
 };
 
@@ -267,7 +366,7 @@ const els = {
   shareBtn: $('shareBtn'),
   bandBadge: $('bandBadge'),
   outputPreview: $('outputPreview'),
-  langToggle: $('langToggle'),
+  langSelect: $('langSelect'),
   toast: $('toast'),
 };
 
@@ -292,7 +391,7 @@ let tooltipTimer = 0;
 /* -------------------------------------------------------------------------- */
 
 function t(key) {
-  return STRINGS[state.lang]?.[key] ?? STRINGS.pl[key] ?? key;
+  return STRINGS[state.lang]?.[key] ?? STRINGS.en[key] ?? key;
 }
 
 function template(key, values) {
@@ -303,6 +402,7 @@ function languageFromUrl() {
   try {
     const value = (new URL(window.location.href).searchParams.get('lang') || '').toLowerCase();
     if (value.startsWith('pl')) return 'pl';
+    if (value.startsWith('de')) return 'de';
     if (value.startsWith('en')) return 'en';
   } catch {
     /* malformed URL */
@@ -316,11 +416,11 @@ function detectLanguage() {
 
   try {
     const stored = localStorage.getItem('eqapo-lang');
-    if (stored === 'pl' || stored === 'en') return stored;
+    if (stored === 'pl' || stored === 'de' || stored === 'en') return stored;
   } catch {
     /* localStorage can be unavailable in private mode */
   }
-  return (navigator.language || '').toLowerCase().startsWith('pl') ? 'pl' : 'en';
+  return 'en';
 }
 
 function syncLanguageUrl() {
@@ -370,7 +470,8 @@ function showToast(message) {
 function updateCharCount() {
   const value = els.configInput.value;
   const chars = value.length;
-  els.charCount.textContent = `${chars.toLocaleString(state.lang === 'pl' ? 'pl-PL' : 'en-US')} ${t('charCount')}`;
+  const locale = state.lang === 'pl' ? 'pl-PL' : state.lang === 'de' ? 'de-DE' : 'en-US';
+  els.charCount.textContent = `${chars.toLocaleString(locale)} ${t('charCount')}`;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -402,9 +503,9 @@ function applyLanguage() {
     }
   });
 
-  els.langToggle.textContent = state.lang === 'pl' ? 'EN' : 'PL';
-  els.langToggle.setAttribute('aria-label', t('switchTo'));
-  els.langToggle.title = t('switchTo');
+  els.langSelect.value = state.lang;
+  els.langSelect.setAttribute('aria-label', t('languageLabel'));
+  els.langSelect.title = t('languageLabel');
 
   try {
     localStorage.setItem('eqapo-lang', state.lang);
@@ -1207,8 +1308,10 @@ els.sampleRateGroup.addEventListener('click', (event) => {
   convertNow();
 });
 
-els.langToggle.addEventListener('click', () => {
-  state.lang = state.lang === 'pl' ? 'en' : 'pl';
+els.langSelect.addEventListener('change', () => {
+  const value = els.langSelect.value;
+  if (value !== 'en' && value !== 'pl' && value !== 'de') return;
+  state.lang = value;
   applyLanguage();
 });
 

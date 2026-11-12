@@ -1,54 +1,58 @@
 # EQ APO → GraphicEQ (Wavelet)
 
-[![Live demo](https://img.shields.io/badge/live-eqapo--to--wavelet.gapski.workers.dev-5eead4?style=flat-square)](https://eqapo-to-wavelet.gapski.workers.dev)
-[![Wsparcie: buycoffee.to](https://img.shields.io/badge/%E2%98%95_Postaw_kaw%C4%99-buycoffee.to-f6c177?style=flat-square)](https://buycoffee.to/gap)
+**English** · [Polski](README.pl.md) · [Deutsch](README.de.md)
 
-Konwerter konfiguracji **Equalizer APO** i **Peace** na plik **GraphicEQ** dla
-[Wavelet](https://github.com/Pittvandewitt/Wavelet). Działa w przeglądarce — również na telefonie —
-bez instalacji i bez wysyłania pliku na serwer. Projekt jest wdrażany jako **Cloudflare Worker**
-ze statycznymi zasobami.
+[![Live demo](https://img.shields.io/badge/live-eqapo--to--wavelet.gapski.workers.dev-5eead4?style=flat-square)](https://eqapo-to-wavelet.gapski.workers.dev)
+[![Support: buycoffee.to](https://img.shields.io/badge/%E2%98%95_Buy_me_a_coffee-buycoffee.to-f6c177?style=flat-square)](https://buycoffee.to/gap)
+
+A converter for **Equalizer APO** and **Peace** configurations into a **GraphicEQ** file for
+[Wavelet](https://github.com/Pittvandewitt/Wavelet). It runs in the browser — including on a phone —
+with no installation and without uploading the file to a server. The project is deployed as a
+**Cloudflare Worker** with static assets.
 
 **Demo:** <https://eqapo-to-wavelet.gapski.workers.dev>
-**Repozytorium:** <https://github.com/gap032/eqapo-to-wavelet>
+**Repository:** <https://github.com/gap032/eqapo-to-wavelet>
 
-## Na podstawie jakiego projektu powstał
+## Based on which project
 
-To webowa wersja projektu
+This is a web version of
 [**zettonaender/eqapotographiceq-gui**](https://github.com/zettonaender/eqapotographiceq-gui).
-Oryginał jest aplikacją desktopową: uruchamia Equalizer APO i `Benchmark.exe` w Windows, mierzy
-odpowiedź częstotliwościową, a następnie przetwarza ją tak jak AutoEQ.
+The original is a desktop application: it launches Equalizer APO and `Benchmark.exe` on Windows,
+measures the frequency response, and then processes it the way AutoEQ does.
 
-Ten projekt odtwarza ten sam efekt bez Windows i bez instalowania Equalizer APO: parsuje filtry
-z pliku konfiguracyjnego i oblicza odpowiedź biquadów bezpośrednio w JavaScript, a potem stosuje
-ten sam pipeline wygładzania i zapisu co oryginał.
+This project reproduces the same result without Windows and without installing Equalizer APO: it
+parses the filters from the configuration file, calculates the biquad response directly in
+JavaScript, and then applies the same smoothing and output pipeline as the original.
 
-## Co robi
+## What it does
 
-1. Wczytuje `config.txt`, `peace.txt`, `ParametricEQ.txt` lub wklejony tekst.
-2. Rozpoznaje filtry Equalizer APO / Peace, sekcje `Device:` i częstotliwość próbkowania
-   (np. z nagłówka `... 96000Hz`).
-3. Liczy charakterystykę częstotliwościową filtrów (RBJ biquad).
-4. Wygładza ją w stylu AutoEQ (Savitzky-Golay, połączenie lekkiego i mocnego wygładzania).
-5. Zapisuje wynik jako 127-pasmowy `GraphicEQ: 20 -0.5; 21 -0.3; …`, znormalizowany do −0,1 dB.
-6. Pozwala pobrać plik, skopiować go do schowka lub udostępnić przez systemowy panel telefonu.
+1. Loads `config.txt`, `peace.txt`, `ParametricEQ.txt`, or pasted text.
+2. Recognises Equalizer APO / Peace filters, `Device:` sections, and the sample rate
+   (for example from a `... 96000Hz` header).
+3. Calculates the frequency response of the filters (RBJ biquads).
+4. Smooths it in the AutoEQ style (Savitzky–Golay, a blend of light and heavy smoothing).
+5. Writes the result as a 127-band `GraphicEQ: 20 -0.5; 21 -0.3; …`, normalized to −0.1 dB.
+6. Lets you download the file, copy it to the clipboard, or share it through the phone's native
+   share sheet.
 
-Wynik importuje się w Wavelet przez **AutoEQ → GraphicEQ → Import**.
+Import the result in Wavelet through **AutoEQ → GraphicEQ → Import**.
 
-## Funkcje
+## Features
 
-- Wgranie pliku, przeciągnięcie i upuszczenie albo wklejenie tekstu.
-- Automatyczne wykrywanie częstotliwości próbkowania z nagłówka pliku, z możliwością ręcznej zmiany.
-- Obsługa sekcji `Device:` i wybór urządzenia.
-- Wybór częstotliwości próbkowania: 44,1 / 48 / 96 / 192 kHz.
-- Wykres porównujący oryginalne EQ z krzywą po wygładzeniu.
-- Pobieranie, kopiowanie i natywne udostępnianie pliku na telefonie.
-- Interfejs PL/EN: `?lang=pl` lub `?lang=en`; bez parametru wykrywany jest język przeglądarki.
-- Wszystkie obliczenia wykonują się lokalnie w przeglądarce.
-- Opcjonalne API `POST /api/convert` w Cloudflare Workerze.
+- Upload a file, drag and drop it, or paste text.
+- Automatic sample-rate detection from the file header, with a manual override.
+- Support for `Device:` sections and device selection.
+- Sample rate selection: 44.1 / 48 / 96 / 192 kHz.
+- A chart comparing the original EQ with the smoothed curve.
+- Download, copy, and native file sharing on a phone.
+- UI in English, Polish and German: `?lang=en`, `?lang=pl`, or `?lang=de`. English is the default;
+  the language picker stores your choice and updates the URL.
+- All calculations run locally in the browser.
+- Optional `POST /api/convert` API in the Cloudflare Worker.
 
-## Obsługiwane filtry
+## Supported filters
 
-| Typ | Aliasy |
+| Type | Aliases |
 | --- | --- |
 | Peaking | `PK`, `PEAK`, `PEAKING`, `BELL` |
 | Low shelf | `LS`, `LSC`, `LOWSHELF` |
@@ -60,61 +64,62 @@ Wynik importuje się w Wavelet przez **AutoEQ → GraphicEQ → Import**.
 | All pass | `AP`, `ALLPASS` |
 | GraphicEQ | `GraphicEQ: 20 -3.0; 21 -2.9; …` |
 
-Parametry: `Fc`, `Gain`, `Q`, `S` (slope dla półek) oraz `BW Oct` (przeliczane na Q).
-Obsługiwane są linie `Filter: …` i `Filter 1: …`; filtry `OFF` są pomijane.
+Parameters: `Fc`, `Gain`, `Q`, `S` (slope for shelves), and `BW Oct` (converted to Q).
+Lines such as `Filter: …` and `Filter 1: …` are supported; `OFF` filters are skipped.
 
-### Czego nie da się przeliczyć w przeglądarce
+### What cannot be converted in the browser
 
-- `Convolution:` — wymaga pliku WAV i splotu; narzędzie pokaże ostrzeżenie.
-- `Include:` — przeglądarka nie ma dostępu do dołączonych plików.
-- `Channel:`, `Copy:`, `Delay:` i inne komendy niezwiązane z charakterystyką amplitudową są ignorowane.
-- `Preamp:` jest pomijany, ponieważ wynik i tak jest normalizowany do −0,1 dB.
+- `Convolution:` — requires a WAV file and convolution; the tool shows a warning.
+- `Include:` — the browser cannot access the included file.
+- `Channel:`, `Copy:`, `Delay:`, and other commands unrelated to the magnitude response are ignored.
+- `Preamp:` is skipped because the result is normalized to −0.1 dB anyway.
 
-## Jak to działa
+## How it works
 
-1. Parsowanie konfiguracji i wybór sekcji urządzenia.
-2. Wyliczenie transmitancji biquadów (wzory RBJ) na siatce 20 Hz–22 kHz, krok 1,01.
-3. Wygładzenie w stylu AutoEQ: filtry Savitzky'ego-Golaya, połączenie „light/heavy” i sigmoidalne
-   przejście w pasmo wysokotonowe.
-4. Próbkowanie do 127 pasm (krok 1,0563) i normalizacja jak w `write_eqapo_graphic_eq()` z AutoEQ.
+1. Parse the configuration and select the device section.
+2. Compute the biquad transfer function (RBJ formulas) on a 20 Hz–22 kHz grid with a step of 1.01.
+3. Smooth in the AutoEQ style: Savitzky–Golay filters, a light/heavy blend, and a sigmoidal
+   transition in the treble range.
+4. Sample to 127 bands (step 1.0563) and normalize the same way as `write_eqapo_graphic_eq()` in
+   AutoEQ.
 
-Dzięki temu wynik jest zgodny z oryginalnym narzędziem poza różnicami wynikającymi z pomiaru przez
-Equalizer APO i obsługi filtrów konwolucyjnych.
+This keeps the output consistent with the original tool, apart from differences caused by
+measurement through Equalizer APO and support for convolution filters.
 
-## Uruchomienie lokalne
+## Running locally
 
-Wymagania: Node.js 20+ i npm.
+Requirements: Node.js 20+ and npm.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Wrangler uruchomi stronę pod adresem `http://localhost:8787`.
+Wrangler starts the site at `http://localhost:8787`.
 
-Język interfejsu można wymusić parametrem adresu: `http://localhost:8787/?lang=pl` lub
-`http://localhost:8787/?lang=en`. Bez parametru aplikacja używa zapisanego wyboru, a potem języka
-przeglądarki; przełącznik języka aktualizuje parametr w adresie.
+You can force the interface language with a URL parameter: `http://localhost:8787/?lang=en`,
+`?lang=pl`, or `?lang=de`. Without a parameter the app uses a stored choice, and English otherwise.
+The language picker updates the parameter in the address.
 
-Testy:
+Tests:
 
 ```bash
 npm test
 npm run check
 ```
 
-## Wdrożenie na Cloudflare
+## Deploying to Cloudflare
 
 ```bash
 npx wrangler login
 npm run deploy
 ```
 
-Po wdrożeniu Worker będzie dostępny pod adresem `https://eqapo-to-wavelet.<subdomain>.workers.dev`.
-Konfiguracja znajduje się w `wrangler.jsonc`, a katalog `public/` jest publikowany jako statyczne
-zasoby Workera.
+After deployment the Worker is available at `https://eqapo-to-wavelet.<subdomain>.workers.dev`.
+Configuration lives in `wrangler.jsonc`, and the `public/` directory is published as the Worker's
+static assets.
 
-Jeśli konto Cloudflare ma dostęp do więcej niż jednego konta, wskaż właściwe konto:
+If your Cloudflare login has access to more than one account, specify the right one:
 
 ```bash
 CLOUDFLARE_ACCOUNT_ID=<account_id> npm run deploy
@@ -128,45 +133,46 @@ curl -X POST https://<worker>.workers.dev/api/convert \
   -d '{"text":"Filter: ON PK Fc 1000 Hz Gain 3 dB Q 1","sampleRate":48000}'
 ```
 
-Odpowiedź zawiera m.in. `graphicEq`, `bands`, `curves`, `stats`, `warnings` i `detectedSampleRate`.
-Jeśli w żądaniu nie ma `sampleRate`, Worker użyje wartości wykrytej z nagłówka konfiguracji,
-a w ostateczności 48 kHz. Endpoint `/api/health` zwraca prosty status.
+The response includes `graphicEq`, `bands`, `curves`, `stats`, `warnings`, and `detectedSampleRate`.
+If the request has no `sampleRate`, the Worker uses the value detected from the configuration header,
+falling back to 48 kHz. The `/api/health` endpoint returns a simple status.
 
-## Prywatność
+## Privacy
 
-Konfiguracja jest czytana i przeliczana lokalnie w przeglądarce. Strona nie wysyła pliku na serwer,
-nie używa analityki ani zewnętrznych skryptów. API `/api/convert` jest opcjonalne i działa tylko
-wtedy, gdy ktoś wywoła je świadomie.
+The configuration is read and converted locally in the browser. The site does not upload the file to
+a server and uses no analytics or third-party scripts. The `/api/convert` API is optional and only
+runs when someone calls it deliberately.
 
-## Struktura
+## Project structure
 
 ```
 public/
-  index.html          interfejs
-  styles.css          wygląd
-  app.js              UI, wykres, pobieranie
-  core.js             parser + obliczenia + formatowanie (czysty JS)
+  index.html          interface
+  styles.css          styling
+  app.js              UI, chart, downloads
+  core.js             parser + calculations + formatting (plain JS)
   manifest.webmanifest
   favicon.svg
-  _headers            nagłówki bezpieczeństwa
+  _headers            security headers
 src/
   worker.js           Cloudflare Worker + /api/convert
 test/
-  core.test.js        testy konwersji
+  core.test.js        conversion tests
 wrangler.jsonc
 ```
 
-`public/core.js` nie zależy od DOM ani od Node — można go używać w przeglądarce, Workerze i testach.
+`public/core.js` depends on neither the DOM nor Node — it can be used in the browser, the Worker,
+and tests.
 
-## Wsparcie
+## Support
 
-Jeśli projekt jest przydatny, możesz postawić mi kawę:
+If the project is useful to you, you can buy me a coffee:
 
-[![Postaw mi kawę na buycoffee.to](https://img.shields.io/badge/%E2%98%95_Postaw_mi_kaw%C4%99-buycoffee.to-f6c177?style=for-the-badge)](https://buycoffee.to/gap)
+[![Buy me a coffee on buycoffee.to](https://img.shields.io/badge/%E2%98%95_Buy_me_a_coffee-buycoffee.to-f6c177?style=for-the-badge)](https://buycoffee.to/gap)
 
-## Podziękowania
+## Credits
 
-- [zettonaender/eqapotographiceq-gui](https://github.com/zettonaender/eqapotographiceq-gui) — oryginalne
-  narzędzie i pipeline, na którym oparty jest ten projekt.
-- [AutoEQ](https://github.com/jaakkopasanen/AutoEq) — wygładzanie i format GraphicEQ.
-- [Wavelet](https://github.com/Pittvandewitt/Wavelet) — odbiorca pliku.
+- [zettonaender/eqapotographiceq-gui](https://github.com/zettonaender/eqapotographiceq-gui) — the
+  original tool and the pipeline this project is based on.
+- [AutoEQ](https://github.com/jaakkopasanen/AutoEq) — smoothing and the GraphicEQ format.
+- [Wavelet](https://github.com/Pittvandewitt/Wavelet) — the consumer of the output file.

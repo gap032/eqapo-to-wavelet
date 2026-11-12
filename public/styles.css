@@ -239,14 +239,64 @@ code {
   border-color: rgba(246, 193, 119, 0.3);
 }
 
-.lang-button {
-  min-width: 46px;
-  justify-content: center;
+.lang-select-wrap {
+  position: relative;
+  gap: 5px;
+  padding: 0 9px;
   border-color: var(--border);
   color: var(--text-soft);
+  cursor: pointer;
+}
+
+.lang-select-wrap::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-left: -2px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.lang-select-wrap svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  opacity: 0.72;
+}
+
+.lang-select-wrap:hover,
+.lang-select-wrap:focus-within {
+  color: var(--text);
+  border-color: rgba(94, 234, 212, 0.4);
+  background: rgba(148, 163, 184, 0.06);
+}
+
+.lang-select {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
   font-family: var(--font-mono);
   font-size: 0.72rem;
+  font-weight: 600;
   letter-spacing: 0.06em;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lang-select:focus {
+  outline: none;
+}
+
+.lang-select option {
+  background: #0b131b;
+  color: #e6edf5;
 }
 
 /* -------------------------------------------------------------------------- */

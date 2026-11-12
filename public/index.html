@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="pl">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#070b10" />
     <meta
       name="description"
-      content="Przekonwertuj konfigurację Equalizer APO lub Peace na GraphicEQ dla Wavelet. Bez instalacji, lokalnie w przeglądarce."
+      content="Convert an Equalizer APO or Peace configuration to GraphicEQ for Wavelet. No installation, processed locally in your browser."
     />
-    <title>EQ APO → GraphicEQ · konwerter dla Wavelet</title>
+    <title>EQ APO → GraphicEQ · converter for Wavelet</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="stylesheet" href="./styles.css" />
@@ -53,9 +53,19 @@
             <path d="M16 10h1.8a2.7 2.7 0 0 1 0 5.4H16" />
             <path d="M7.5 3c0 1-1 1.4-1 2.5M11 3c0 1-1 1.4-1 2.5" />
           </svg>
-          <span data-i18n="support">Wsparcie</span>
+          <span data-i18n="support">Support</span>
         </a>
-        <button class="ghost-button lang-button" id="langToggle" type="button" aria-label="Switch language">EN</button>
+        <label class="ghost-button lang-select-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3.6 9h16.8M3.6 15h16.8M12 3c2.4 2.5 3.6 5.6 3.6 9S14.4 18.5 12 21c-2.4-2.5-3.6-5.6-3.6-9S9.6 5.5 12 3Z" />
+          </svg>
+          <select id="langSelect" aria-label="Language">
+            <option value="en">EN</option>
+            <option value="pl">PL</option>
+            <option value="de">DE</option>
+          </select>
+        </label>
       </div>
     </header>
 
@@ -63,17 +73,17 @@
       <section class="hero">
         <p class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span><span data-i18n="eyebrow">Equalizer APO / Peace → Wavelet</span></p>
         <h1>
-          <span data-i18n="heroTitleA">Przenieś swoje EQ</span><br />
-          <span class="gradient-text" data-i18n="heroTitleB">na telefon.</span>
+          <span data-i18n="heroTitleA">Move your EQ</span><br />
+          <span class="gradient-text" data-i18n="heroTitleB">to your phone.</span>
         </h1>
         <p class="lede" data-i18n-html="heroLede">
-          Wgraj <code>config.txt</code> lub <code>peace.txt</code>. Otrzymasz plik <code>GraphicEQ</code> gotowy do importu w Wavelet.
-          Wszystkie obliczenia wykonują się w Twojej przeglądarce.
+          Upload <code>config.txt</code> or <code>peace.txt</code>. Get a <code>GraphicEQ</code> file ready to import in Wavelet.
+          All processing happens in your browser.
         </p>
         <div class="hero-points">
-          <span class="hero-point" data-i18n="pointPrivate">Plik zostaje na urządzeniu</span>
-          <span class="hero-point" data-i18n="pointBands">127 pasm, format Wavelet</span>
-          <span class="hero-point" data-i18n="pointFormats">APO, Peace i AutoEQ</span>
+          <span class="hero-point" data-i18n="pointPrivate">Your file stays on the device</span>
+          <span class="hero-point" data-i18n="pointBands">127 bands, Wavelet format</span>
+          <span class="hero-point" data-i18n="pointFormats">APO, Peace and AutoEQ</span>
         </div>
       </section>
 
@@ -87,8 +97,8 @@
                 <path d="M8 13h8M8 17h5" />
               </svg>
             </span>
-            <span class="drop-title" data-i18n="dropTitle">Wybierz plik konfiguracji</span>
-            <span class="drop-hint" data-i18n="dropHint">Dotknij, aby wybrać, lub przeciągnij plik tutaj</span>
+            <span class="drop-title" data-i18n="dropTitle">Choose a configuration file</span>
+            <span class="drop-hint" data-i18n="dropHint">Tap to browse, or drop a file here</span>
           </label>
 
           <input id="fileInput" type="file" accept=".txt,.cfg,.csv,text/plain" hidden />
@@ -98,28 +108,28 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
                 <path d="M12 16V4M7 9l5-5 5 5M5 20h14" />
               </svg>
-              <span data-i18n="chooseFile">Wybierz plik</span>
+              <span data-i18n="chooseFile">Choose file</span>
             </button>
             <button class="button secondary" id="pasteBtn" type="button">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
                 <path d="M9 5h6M9 3h6a2 2 0 0 1 2 2v1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h1V5a2 2 0 0 1 2-2Z" />
               </svg>
-              <span data-i18n="pasteText">Wklej tekst</span>
+              <span data-i18n="pasteText">Paste text</span>
             </button>
           </div>
 
           <p class="drop-formats" data-i18n="dropFormats">config.txt · peace.txt · ParametricEQ.txt</p>
-          <button class="text-button" id="exampleBtn" type="button" data-i18n="tryExample">Wypróbuj przykład</button>
+          <button class="text-button" id="exampleBtn" type="button" data-i18n="tryExample">Try an example</button>
         </div>
 
         <div class="card editor-card is-hidden" id="editorCard">
           <div class="card-head">
             <div>
-              <p class="step-label">01 · <span data-i18n="inputStep">Wejście</span></p>
-              <h2 data-i18n="editorTitle">Konfiguracja</h2>
+              <p class="step-label">01 · <span data-i18n="inputStep">Input</span></p>
+              <h2 data-i18n="editorTitle">Configuration</h2>
               <p class="file-name" id="fileName"></p>
             </div>
-            <button class="icon-button" id="resetBtn" type="button" data-i18n-title="clear" aria-label="Wyczyść">
+            <button class="icon-button" id="resetBtn" type="button" data-i18n-title="clear" aria-label="Clear">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
                 <path d="M6 6l12 12M18 6 6 18" />
               </svg>
@@ -127,25 +137,25 @@
           </div>
 
           <div class="field is-hidden" id="deviceField">
-            <label class="field-label" for="deviceSelect" data-i18n="deviceLabel">Urządzenie</label>
+            <label class="field-label" for="deviceSelect" data-i18n="deviceLabel">Device</label>
             <div class="select-wrap">
               <select id="deviceSelect"></select>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
                 <path d="m6 9 6 6 6-6" />
               </svg>
             </div>
-            <p class="field-hint" data-i18n="deviceHint">Wybierz sekcję urządzenia z pliku konfiguracji.</p>
+            <p class="field-hint" data-i18n="deviceHint">Select a device section from the configuration file.</p>
           </div>
 
           <div class="field">
-            <span class="field-label" data-i18n="sampleRateLabel">Częstotliwość próbkowania</span>
+            <span class="field-label" data-i18n="sampleRateLabel">Sample rate</span>
             <div class="segmented" id="sampleRateGroup" role="group" aria-label="Sample rate">
               <button type="button" data-rate="44100">44.1 kHz</button>
               <button type="button" data-rate="48000" aria-pressed="true">48 kHz</button>
               <button type="button" data-rate="96000">96 kHz</button>
               <button type="button" data-rate="192000">192 kHz</button>
             </div>
-            <p class="field-hint" data-i18n="sampleRateHint">Taka, jaka była ustawiona w Equalizer APO dla tego urządzenia.</p>
+            <p class="field-hint" data-i18n="sampleRateHint">The rate Equalizer APO used for this device.</p>
           </div>
 
           <details class="source-details" id="sourceDetails">
@@ -154,7 +164,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
                   <path d="m8 9-3 3 3 3M16 9l3 3-3 3" />
                 </svg>
-                <span data-i18n="showSource">Pokaż / edytuj konfigurację</span>
+                <span data-i18n="showSource">Show / edit configuration</span>
               </span>
               <span class="char-count" id="charCount"></span>
             </summary>
@@ -163,8 +173,8 @@
               spellcheck="false"
               autocomplete="off"
               autocapitalize="off"
-              placeholder="Wklej tutaj zawartość config.txt lub peace.txt…"
-              aria-label="Konfiguracja Equalizer APO"
+              placeholder="Paste the contents of config.txt or peace.txt here…"
+              aria-label="Equalizer APO configuration"
             ></textarea>
           </details>
 
@@ -176,21 +186,21 @@
         <div class="card result-card is-hidden" id="resultCard">
           <div class="card-head">
             <div>
-              <p class="step-label">02 · <span data-i18n="resultStep">Wynik</span></p>
-              <h2 data-i18n="resultTitle">Graphic EQ dla Wavelet</h2>
+              <p class="step-label">02 · <span data-i18n="resultStep">Result</span></p>
+              <h2 data-i18n="resultTitle">Graphic EQ for Wavelet</h2>
             </div>
-            <span class="status-pill"><span class="status-dot" aria-hidden="true"></span><span data-i18n="ready">Gotowe</span></span>
+            <span class="status-pill"><span class="status-dot" aria-hidden="true"></span><span data-i18n="ready">Ready</span></span>
           </div>
 
           <div class="chart-card">
             <div class="chart-legend">
               <span class="legend-item">
                 <span class="legend-swatch swatch-original" aria-hidden="true"></span>
-                <span data-i18n="legendApo">Oryginalne EQ</span>
+                <span data-i18n="legendApo">Original EQ</span>
               </span>
               <span class="legend-item">
                 <span class="legend-swatch swatch-wavelet" aria-hidden="true"></span>
-                <span data-i18n="legendWavelet">Wavelet po wygładzeniu</span>
+                <span data-i18n="legendWavelet">Wavelet after smoothing</span>
               </span>
             </div>
             <div class="chart-shell" id="chartShell">
@@ -206,14 +216,14 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
                 <path d="M12 4v12M7 11l5 5 5-5M5 20h14" />
               </svg>
-              <span data-i18n="download">Pobierz GraphicEQ.txt</span>
+              <span data-i18n="download">Download GraphicEQ.txt</span>
             </button>
             <button class="button secondary" id="copyBtn" type="button">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
                 <rect x="9" y="9" width="11" height="11" rx="2" />
                 <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" />
               </svg>
-              <span data-i18n="copy">Kopiuj</span>
+              <span data-i18n="copy">Copy</span>
             </button>
             <button class="button secondary is-hidden" id="shareBtn" type="button">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
@@ -222,13 +232,13 @@
                 <circle cx="18" cy="19" r="3" />
                 <path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4" />
               </svg>
-              <span data-i18n="share">Udostępnij</span>
+              <span data-i18n="share">Share</span>
             </button>
           </div>
 
           <details class="preview">
             <summary>
-              <span data-i18n="preview">Podgląd pliku</span>
+              <span data-i18n="preview">File preview</span>
               <span class="preview-badge" id="bandBadge"></span>
             </summary>
             <pre id="outputPreview"></pre>
@@ -239,42 +249,42 @@
               <circle cx="12" cy="12" r="9" />
               <path d="M12 11v5M12 8h.01" />
             </svg>
-            <span data-i18n="resultNote">Plik jest znormalizowany do −0,1 dB, więc dodatkowy Preamp nie jest potrzebny.</span>
+            <span data-i18n="resultNote">The file is normalized to −0.1 dB, so no extra Preamp is needed.</span>
           </p>
         </div>
       </section>
 
       <section class="how">
         <div class="section-heading">
-          <p class="eyebrow"><span data-i18n="howEyebrow">Trzy kroki</span></p>
-          <h2 data-i18n="howTitle">Jak to działa?</h2>
+          <p class="eyebrow"><span data-i18n="howEyebrow">Three steps</span></p>
+          <h2 data-i18n="howTitle">How it works</h2>
         </div>
 
         <div class="steps">
           <article class="step-card">
             <span class="step-number">1</span>
-            <h3 data-i18n="step1Title">Znajdź plik EQ</h3>
+            <h3 data-i18n="step1Title">Find your EQ file</h3>
             <p data-i18n-html="step1Text">
               Equalizer APO: <code>C:\Program Files\EqualizerAPO\config\config.txt</code>. Peace:
-              <code>peace.txt</code> w tym samym folderze.
+              <code>peace.txt</code> in the same folder.
             </p>
           </article>
 
           <article class="step-card">
             <span class="step-number">2</span>
-            <h3 data-i18n="step2Title">Wgraj i sprawdź</h3>
+            <h3 data-i18n="step2Title">Upload and inspect</h3>
             <p data-i18n-html="step2Text">
-              Wybierz urządzenie i częstotliwość próbkowania. Wykres pokaże różnicę między oryginalnym EQ
-              a tym, co trafi do Wavelet.
+              Pick the device and sample rate. The chart shows the difference between the original EQ
+              and what Wavelet will apply.
             </p>
           </article>
 
           <article class="step-card">
             <span class="step-number">3</span>
-            <h3 data-i18n="step3Title">Zaimportuj w Wavelet</h3>
+            <h3 data-i18n="step3Title">Import into Wavelet</h3>
             <p data-i18n-html="step3Text">
-              W Wavelet otwórz <strong>AutoEQ</strong> → <strong>GraphicEQ</strong> → <strong>Import</strong>
-              i wybierz pobrany plik. Gotowe.
+              In Wavelet open <strong>AutoEQ</strong> → <strong>GraphicEQ</strong> → <strong>Import</strong>
+              and choose the downloaded file.
             </p>
           </article>
         </div>
@@ -288,9 +298,9 @@
           </svg>
         </span>
         <div>
-          <h3 data-i18n="privacyTitle">Twoje dane zostają na telefonie</h3>
+          <h3 data-i18n="privacyTitle">Your data stays on your phone</h3>
           <p data-i18n="privacyText">
-            Plik jest czytany i przeliczany lokalnie w przeglądarce. Nie wysyłamy go na żaden serwer.
+            The file is read and converted locally in your browser. Nothing is uploaded to a server.
           </p>
         </div>
       </section>
@@ -298,7 +308,7 @@
 
     <footer class="site-footer">
       <p data-i18n-html="footerBuiltOn">
-        Na podstawie projektu <a href="https://github.com/zettonaender/eqapotographiceq-gui" target="_blank" rel="noreferrer noopener">eqapotographiceq-gui</a>.
+        Based on the <a href="https://github.com/zettonaender/eqapotographiceq-gui" target="_blank" rel="noreferrer noopener">eqapotographiceq-gui</a> project.
       </p>
 
       <div class="footer-links">
@@ -314,7 +324,7 @@
               d="M12 .7a11.3 11.3 0 0 0-3.6 22c.6.1.8-.2.8-.5v-2.1c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.6 1.2 3.3.9.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0C17.1 3.5 18.1 4 18.1 4c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.6.8.5A11.3 11.3 0 0 0 12 .7Z"
             />
           </svg>
-          <span data-i18n="footerGithub">Kod źródłowy</span>
+          <span data-i18n="footerGithub">Source code</span>
         </a>
         <a
           class="footer-link footer-support"
@@ -328,17 +338,17 @@
             <path d="M16 10h1.8a2.7 2.7 0 0 1 0 5.4H16" />
             <path d="M7.5 3c0 1-1 1.4-1 2.5M11 3c0 1-1 1.4-1 2.5" />
           </svg>
-          <span data-i18n="supportCoffee">Postaw kawę</span>
+          <span data-i18n="supportCoffee">Buy me a coffee</span>
         </a>
       </div>
 
-      <p class="footer-meta" data-i18n="footerMeta">Cloudflare Worker · bez zależności · open source</p>
+      <p class="footer-meta" data-i18n="footerMeta">Cloudflare Worker · no dependencies · open source</p>
     </footer>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <noscript>
-      <div class="noscript">Ten konwerter wymaga włączonego JavaScriptu.</div>
+      <div class="noscript">This converter requires JavaScript.</div>
     </noscript>
 
     <script type="module" src="./app.js"></script>
