@@ -1668,6 +1668,34 @@ h1 {
   }
 }
 
+@media (max-width: 420px) {
+  .site-header {
+    gap: 8px;
+  }
+
+  .brand-text {
+    font-size: 0.76rem;
+  }
+
+  .header-tools {
+    gap: 6px;
+  }
+
+  .lang-select-wrap {
+    padding: 0 7px;
+  }
+
+  .lang-select-wrap svg {
+    display: none;
+  }
+}
+
+@media (max-width: 340px) {
+  .brand-text {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
