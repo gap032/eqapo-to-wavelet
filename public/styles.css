@@ -239,64 +239,155 @@ code {
   border-color: rgba(246, 193, 119, 0.3);
 }
 
-.lang-select-wrap {
+.lang-picker {
   position: relative;
-  gap: 5px;
-  padding: 0 9px;
+  flex: none;
+}
+
+.lang-button {
+  gap: 6px;
+  padding: 0 10px;
   border-color: var(--border);
   color: var(--text-soft);
-  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
 }
 
-.lang-select-wrap::after {
-  content: "";
-  width: 6px;
-  height: 6px;
-  margin-left: -2px;
-  border-right: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  transform: rotate(45deg) translateY(-1px);
-  opacity: 0.6;
-  pointer-events: none;
-}
-
-.lang-select-wrap svg {
-  width: 14px;
-  height: 14px;
-  flex: none;
-  opacity: 0.72;
-}
-
-.lang-select-wrap:hover,
-.lang-select-wrap:focus-within {
+.lang-button:hover,
+.lang-button[aria-expanded="true"] {
   color: var(--text);
   border-color: rgba(94, 234, 212, 0.4);
   background: rgba(148, 163, 184, 0.06);
 }
 
-.lang-select {
-  appearance: none;
-  -webkit-appearance: none;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  line-height: 1;
-  cursor: pointer;
+.lang-flag-stack {
+  display: inline-grid;
+  flex: none;
+  width: 20px;
+  height: 14px;
+  overflow: hidden;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16);
 }
 
-.lang-select:focus {
+.lang-flag-stack .lang-flag {
+  display: none;
+  grid-area: 1 / 1;
+  width: 20px;
+  height: 14px;
+}
+
+.lang-button[data-lang="en"] .lang-flag-stack [data-flag="en"],
+.lang-button[data-lang="pl"] .lang-flag-stack [data-flag="pl"],
+.lang-button[data-lang="de"] .lang-flag-stack [data-flag="de"] {
+  display: block;
+}
+
+.lang-code {
+  min-width: 17px;
+  text-align: center;
+}
+
+.lang-button .lang-chevron {
+  width: 11px;
+  height: 11px;
+  opacity: 0.55;
+  transition: transform 0.18s ease;
+}
+
+.lang-button[aria-expanded="true"] .lang-chevron {
+  transform: rotate(180deg);
+}
+
+.lang-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 60;
+  width: 192px;
+  padding: 6px;
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  background: rgba(9, 15, 22, 0.97);
+  box-shadow:
+    0 22px 55px -12px rgba(0, 0, 0, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transform-origin: top right;
+  animation: lang-menu-in 0.16s ease both;
+}
+
+.lang-menu[hidden] {
+  display: none;
+}
+
+@keyframes lang-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-5px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.lang-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--text-soft);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    color 0.14s ease,
+    background 0.14s ease;
+}
+
+.lang-option:hover,
+.lang-option:focus-visible {
+  color: var(--text);
+  background: rgba(148, 163, 184, 0.1);
   outline: none;
 }
 
-.lang-select option {
-  background: #0b131b;
-  color: #e6edf5;
+.lang-option[aria-selected="true"] {
+  color: var(--text);
+  background: rgba(94, 234, 212, 0.08);
+}
+
+.lang-option .lang-flag {
+  flex: none;
+  width: 21px;
+  height: 14px;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
+.lang-option-text {
+  flex: 1;
+  white-space: nowrap;
+}
+
+.lang-option .lang-check {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  color: var(--accent);
+  opacity: 0;
+}
+
+.lang-option[aria-selected="true"] .lang-check {
+  opacity: 1;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -1681,17 +1772,14 @@ h1 {
     gap: 6px;
   }
 
-  .lang-select-wrap {
-    padding: 0 7px;
-  }
-
-  .lang-select-wrap svg {
-    display: none;
+  .lang-button {
+    padding: 0 8px;
   }
 }
 
-@media (max-width: 340px) {
-  .brand-text {
+@media (max-width: 380px) {
+  .brand-arrow,
+  .brand-accent {
     display: none;
   }
 }

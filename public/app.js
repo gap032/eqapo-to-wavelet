@@ -366,7 +366,10 @@ const els = {
   shareBtn: $('shareBtn'),
   bandBadge: $('bandBadge'),
   outputPreview: $('outputPreview'),
-  langSelect: $('langSelect'),
+  langPicker: $('langPicker'),
+  langButton: $('langButton'),
+  langMenu: $('langMenu'),
+  langCode: $('langCode'),
   toast: $('toast'),
 };
 
@@ -503,9 +506,14 @@ function applyLanguage() {
     }
   });
 
-  els.langSelect.value = state.lang;
-  els.langSelect.setAttribute('aria-label', t('languageLabel'));
-  els.langSelect.title = t('languageLabel');
+  els.langButton.dataset.lang = state.lang;
+  els.langCode.textContent = state.lang.toUpperCase();
+  els.langButton.setAttribute('aria-label', t('languageLabel'));
+  els.langButton.title = t('languageLabel');
+  els.langMenu.setAttribute('aria-label', t('languageLabel'));
+  els.langMenu.querySelectorAll('.lang-option').forEach((option) => {
+    option.setAttribute('aria-selected', String(option.dataset.lang === state.lang));
+  });
 
   try {
     localStorage.setItem('eqapo-lang', state.lang);
@@ -517,6 +525,26 @@ function applyLanguage() {
   updateCharCount();
   if (state.source) renderFileMeta();
   if (state.result) renderConversion(state.result);
+}
+
+function closeLanguageMenu(returnFocus = false) {
+  if (els.langMenu.hidden) return;
+  els.langMenu.hidden = true;
+  els.langButton.setAttribute('aria-expanded', 'false');
+  if (returnFocus) els.langButton.focus();
+}
+
+function openLanguageMenu(focusTarget = 'selected') {
+  els.langMenu.hidden = false;
+  els.langButton.setAttribute('aria-expanded', 'true');
+  if (!focusTarget) return;
+
+  const options = [...els.langMenu.querySelectorAll('.lang-option')];
+  const target =
+    focusTarget === 'last'
+      ? options[options.length - 1]
+      : options.find((option) => option.dataset.lang === state.lang) || options[0];
+  target?.focus();
 }
 
 /* -------------------------------------------------------------------------- */
@@ -1308,11 +1336,70 @@ els.sampleRateGroup.addEventListener('click', (event) => {
   convertNow();
 });
 
-els.langSelect.addEventListener('change', () => {
-  const value = els.langSelect.value;
-  if (value !== 'en' && value !== 'pl' && value !== 'de') return;
-  state.lang = value;
-  applyLanguage();
+els.langButton.addEventListener('click', () => {
+  if (els.langMenu.hidden) openLanguageMenu(null);
+  else closeLanguageMenu();
+});
+
+els.langMenu.querySelectorAll('.lang-option').forEach((option) => {
+  option.addEventListener('click', () => {
+    const value = option.dataset.lang;
+    if (value === 'en' || value === 'pl' || value === 'de') {
+      state.lang = value;
+      applyLanguage();
+    }
+    closeLanguageMenu(true);
+  });
+});
+
+els.langPicker.addEventListener('keydown', (event) => {
+  const options = [...els.langMenu.querySelectorAll('.lang-option')];
+
+  if (event.key === 'Escape') {
+    if (!els.langMenu.hidden) {
+      event.preventDefault();
+      closeLanguageMenu(true);
+    }
+    return;
+  }
+
+  if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+    event.preventDefault();
+    const forward = event.key === 'ArrowDown';
+
+    if (els.langMenu.hidden) {
+      openLanguageMenu(forward ? 'selected' : 'last');
+      return;
+    }
+
+    const index = options.indexOf(document.activeElement);
+    const next =
+      index < 0
+        ? forward
+          ? 0
+          : options.length - 1
+        : (index + (forward ? 1 : -1) + options.length) % options.length;
+    options[next]?.focus();
+    return;
+  }
+
+  if (els.langMenu.hidden) return;
+
+  if (event.key === 'Home') {
+    event.preventDefault();
+    options[0]?.focus();
+  } else if (event.key === 'End') {
+    event.preventDefault();
+    options[options.length - 1]?.focus();
+  }
+});
+
+els.langPicker.addEventListener('focusout', (event) => {
+  if (!els.langPicker.contains(event.relatedTarget)) closeLanguageMenu();
+});
+
+document.addEventListener('click', (event) => {
+  if (!els.langMenu.hidden && !els.langPicker.contains(event.target)) closeLanguageMenu();
 });
 
 els.downloadBtn.addEventListener('click', downloadResult);

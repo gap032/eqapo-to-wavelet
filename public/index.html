@@ -55,17 +55,80 @@
           </svg>
           <span data-i18n="support">Support</span>
         </a>
-        <label class="ghost-button lang-select-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="9" />
-            <path d="M3.6 9h16.8M3.6 15h16.8M12 3c2.4 2.5 3.6 5.6 3.6 9S14.4 18.5 12 21c-2.4-2.5-3.6-5.6-3.6-9S9.6 5.5 12 3Z" />
-          </svg>
-          <select id="langSelect" aria-label="Language">
-            <option value="en">EN</option>
-            <option value="pl">PL</option>
-            <option value="de">DE</option>
-          </select>
-        </label>
+        <div class="lang-picker" id="langPicker">
+          <button
+            class="ghost-button lang-button"
+            id="langButton"
+            type="button"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-controls="langMenu"
+            aria-label="Language"
+            data-lang="en"
+          >
+            <span class="lang-flag-stack" aria-hidden="true">
+              <svg class="lang-flag" data-flag="en" viewBox="0 0 24 16">
+                <rect width="24" height="16" fill="#012169" />
+                <path d="M0 0 24 16M24 0 0 16" stroke="#ffffff" stroke-width="3.4" />
+                <path d="M0 0 24 16M24 0 0 16" stroke="#c8102e" stroke-width="1.8" />
+                <path d="M12 0v16M0 8h24" stroke="#ffffff" stroke-width="5.4" />
+                <path d="M12 0v16M0 8h24" stroke="#c8102e" stroke-width="3.2" />
+              </svg>
+              <svg class="lang-flag" data-flag="pl" viewBox="0 0 24 16">
+                <rect width="24" height="8" fill="#f7f7f7" />
+                <rect y="8" width="24" height="8" fill="#dc143c" />
+              </svg>
+              <svg class="lang-flag" data-flag="de" viewBox="0 0 24 16">
+                <rect width="24" height="5.33" fill="#141414" />
+                <rect y="5.33" width="24" height="5.34" fill="#dd0000" />
+                <rect y="10.67" width="24" height="5.33" fill="#ffce00" />
+              </svg>
+            </span>
+            <span class="lang-code" id="langCode">EN</span>
+            <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+
+          <div class="lang-menu" id="langMenu" role="listbox" aria-label="Language" hidden>
+            <button class="lang-option" type="button" role="option" data-lang="en" aria-selected="true" lang="en">
+              <svg class="lang-flag" viewBox="0 0 24 16" aria-hidden="true">
+                <rect width="24" height="16" fill="#012169" />
+                <path d="M0 0 24 16M24 0 0 16" stroke="#ffffff" stroke-width="3.4" />
+                <path d="M0 0 24 16M24 0 0 16" stroke="#c8102e" stroke-width="1.8" />
+                <path d="M12 0v16M0 8h24" stroke="#ffffff" stroke-width="5.4" />
+                <path d="M12 0v16M0 8h24" stroke="#c8102e" stroke-width="3.2" />
+              </svg>
+              <span class="lang-option-text">English</span>
+              <svg class="lang-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m5 12 5 5 9-11" />
+              </svg>
+            </button>
+
+            <button class="lang-option" type="button" role="option" data-lang="pl" aria-selected="false" lang="pl">
+              <svg class="lang-flag" viewBox="0 0 24 16" aria-hidden="true">
+                <rect width="24" height="8" fill="#f7f7f7" />
+                <rect y="8" width="24" height="8" fill="#dc143c" />
+              </svg>
+              <span class="lang-option-text">Polski</span>
+              <svg class="lang-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m5 12 5 5 9-11" />
+              </svg>
+            </button>
+
+            <button class="lang-option" type="button" role="option" data-lang="de" aria-selected="false" lang="de">
+              <svg class="lang-flag" viewBox="0 0 24 16" aria-hidden="true">
+                <rect width="24" height="5.33" fill="#141414" />
+                <rect y="5.33" width="24" height="5.34" fill="#dd0000" />
+                <rect y="10.67" width="24" height="5.33" fill="#ffce00" />
+              </svg>
+              <span class="lang-option-text">Deutsch</span>
+              <svg class="lang-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m5 12 5 5 9-11" />
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
     </header>
 
